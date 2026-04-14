@@ -1,0 +1,268 @@
+{
+  "info": {
+    "_postman_id": "5aa5dc1b-2d8f-4c79-ba93-4c5f3429acfe",
+    "name": "Inventory Manager API",
+    "description": "### A secure RESTful API for managing an Inventory system\n\n- Includes authentication, authorization, pagination and search functionality\n    \n- Role-Based Access Control (RBAC)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52437339",
+    "_collection_link": "https://go.postman.co/collection/52437339-5aa5dc1b-2d8f-4c79-ba93-4c5f3429acfe?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth End-points",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Yel_lowBaby\",\r\n    \"email\": \"yel_lowBaby@mail.com\",\r\n    \"password\": \"YellowBaby@123\",\r\n    \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:1004/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1004",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registers a new user with role-based access\n\n- Email must be in email format\n    \n- Password must have at least 8 characters\n    \n- Password must contain an uppercase\n    \n- Password must contain a lowercase\n    \n- Password must contain a special character"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"email\": \"yel_lowBaby@mail.com\",\r\n    \"password\": \"YellowBaby@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:1004/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1004",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Authenticates user and returns a JWT token\n\n- Token must be used for all protected routes"
+          },
+          "response": []
+        }
+      ],
+      "description": "End-points for registering and logging in of users"
+    },
+    {
+      "name": "Products End-points",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGJiNmU2ZDY4ZWI1MWIzYWU2ZGM3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjE3ODQ4MiwiZXhwIjoxNzc2MTg1NjgyfQ.ibmJ71vKBeD704QtuNbkSAiu_7AMXEuonEsVOSBlMAY",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Sony PlayStation 5 Console",
+                  "type": "text",
+                  "uuid": "8c1489d5-2864-4f19-bcec-61374f80036a"
+                },
+                {
+                  "key": "description",
+                  "value": "825 GB storage",
+                  "type": "text",
+                  "uuid": "5d330609-1e24-4959-b256-9cd6699e9929"
+                },
+                {
+                  "key": "price",
+                  "value": "1020500",
+                  "type": "text",
+                  "uuid": "9c29a8ff-0730-40ab-b4ea-39aef1c69449"
+                },
+                {
+                  "key": "quantity",
+                  "value": "8",
+                  "type": "text",
+                  "uuid": "93cc39ed-1592-4609-b79e-84d7b66a9c47"
+                },
+                {
+                  "key": "category",
+                  "value": "Games and consoles",
+                  "type": "text",
+                  "uuid": "2a0f636f-72c0-45bf-96d8-84fbe7c48876"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "693d52a0-4c65-401a-90f8-990b2bda42bd",
+                  "src": "/C:/Users/Lenovo/Documents/BabyFace/VS Code/-original-imaghyykrhvewh4y.webp"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1004/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1004",
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "Create a product with image upload (Admin / Storekeeper)\n\n- Name, price and quantity are required"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Products",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGJiNmU2ZDY4ZWI1MWIzYWU2ZGM3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjE3ODQ4MiwiZXhwIjoxNzc2MTg1NjgyfQ.ibmJ71vKBeD704QtuNbkSAiu_7AMXEuonEsVOSBlMAY",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:1004/api/products/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1004",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Retrieves products with search, filter, sort, paginatuon\n\n- /api/products?name=iphone\n    \n- /api/products?price\\[gte\\]=60000\n    \n- /api/products?price\\[lte\\]=60000\n    \n- /api/products?page=1&limit=2"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGJiNmU2ZDY4ZWI1MWIzYWU2ZGM3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjE3ODQ4MiwiZXhwIjoxNzc2MTg1NjgyfQ.ibmJ71vKBeD704QtuNbkSAiu_7AMXEuonEsVOSBlMAY",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Sony PlayStation 5 Console\",\r\n    \"description\": \"825 GB storage\",\r\n    \"price\": 1020500,\r\n    \"quantity\": 6,\r\n    \"category\": \"Games and consoles\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:1004/api/products/69de63496e6577833a6fbf3c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1004",
+              "path": [
+                "api",
+                "products",
+                "69de63496e6577833a6fbf3c"
+              ]
+            },
+            "description": "Updates product details by Admin / Storekeeper (JSON body)\n\n- Requires product ID to be specified in the url"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGJiNmU2ZDY4ZWI1MWIzYWU2ZGM3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjE3ODQ4MiwiZXhwIjoxNzc2MTg1NjgyfQ.ibmJ71vKBeD704QtuNbkSAiu_7AMXEuonEsVOSBlMAY",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:1004/api/products/69de659b6e6577833a6fbf3e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1004",
+              "path": [
+                "api",
+                "products",
+                "69de659b6e6577833a6fbf3e"
+              ]
+            },
+            "description": "Deletes a product (admin access only)\n\n- Requires product ID to be specified in the url"
+          },
+          "response": []
+        }
+      ],
+      "description": "Handles all product-related operations including CRUD"
+    }
+  ]
+}
